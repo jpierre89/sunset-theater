@@ -1,4 +1,4 @@
-from modules import db
+from application import db
 from marshmallow_sqlalchemy import ModelSchema
 
 movies_actors_association = db.Table('actors',

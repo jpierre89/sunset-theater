@@ -3,9 +3,9 @@ from flask import Flask
 from flask_marshmallow import Marshmallow
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from common.config import Config
+from flask_migrate import Migrate
+from config import Config
 
 app = Flask(__name__)
 
@@ -15,13 +15,13 @@ app.config.from_object(Config)
 api = Api(app)
 ma = Marshmallow(app)
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 jwt = JWTManager(app)
+migrate = Migrate(app, db)
 
-import modules.movies
-import modules.admin
-import modules.accounts
-import modules.access
+import application.movies
+import application.admin
+import application.accounts
+import application.access
 
 
 @app.route('/')

@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_refresh_token_required, get_jwt_identity)
-from modules.accounts import User
+from application.accounts import User
 from flask_security.utils import verify_password
 
 

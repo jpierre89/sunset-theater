@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from .models import Movie, movie_schema, movies_schema, Actor
 from flask import abort, jsonify
-from modules import db
+from application import db
 from flask_jwt_extended import jwt_required
 
 

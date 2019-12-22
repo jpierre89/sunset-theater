@@ -1,4 +1,4 @@
-from modules import db
+from application import db
 from flask_security import UserMixin, RoleMixin
 from marshmallow_sqlalchemy import ModelSchema
 
@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(255))
+    email = db.Column(db.String(255), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
@@ -34,6 +34,8 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def find_by_username(cls, username):
+        """username is email"""
+
         return cls.query.filter_by(email=username).first()
 
 

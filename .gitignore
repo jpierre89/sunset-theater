@@ -21,4 +21,4 @@ utils/__pycache__
 venv
 
 # ignore database
-modules/api.db
+app.db

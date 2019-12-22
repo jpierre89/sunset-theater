@@ -1,10 +1,10 @@
-from modules import app, db
+from application import app, db
 from flask import url_for, redirect, request, abort
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_security import current_user
-from modules.movies import Movie, Genre, Actor
-from modules.accounts import User, Role
+from application.movies import Movie, Genre, Actor
+from application.accounts import User, Role
 
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_admin import helpers as admin_helpers
