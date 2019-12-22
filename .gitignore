@@ -1,0 +1,21 @@
+# ignore pycache's
+configs/__pycache__
+data/__pycache__
+misc/__pycache__
+models/__pycache__
+utils/__pycache__
+
+# ignore compiled python
+*.pyc
+
+# ignore MacOS file
+*.DS_Store
+
+# ignore git
+.git
+
+# ignore Jetbrains
+.idea
+
+# ignore virtual environment
+venv
