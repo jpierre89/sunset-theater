@@ -37,11 +37,9 @@ $ flask run
 Navigate to URL in a browser
 
 #### Database Migration
-Changes schema without creating new db (Creates db if it doesn't exist)
-Note: migration repository exists in application root
-Note: can downgrade to undue last migration
-Note: Does not support dropping/altering*
-
+- Changes schema while maintaining data in database
+- Note: SQLite doesn's support alter table, thus render_as_batch=True for migration env
+https://alembic.sqlalchemy.org/en/latest/batch.html#batch-mode-with-autogenerate
 1. Generate migration script
 2. run script to upgrade database
 
