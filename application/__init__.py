@@ -22,6 +22,9 @@ import application.movies
 import application.admin
 import application.accounts
 import application.access
+import application.theater
+
+# db.create_all()
 
 
 @app.route('/')

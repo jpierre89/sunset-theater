@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from .models import Movie, movie_schema, movies_schema, Actor
+from .models import Movie, Actor  #, movie_schema, movies_schema
 from flask import abort, jsonify
 from application import db
 from flask_jwt_extended import jwt_required
@@ -17,7 +17,7 @@ class OneMovie(Resource):
         if not movie:
             return abort(404, 'Movie with id: {} does not exist in database.'.format(self.args['movie_id']))
 
-        return jsonify(movies=movie_schema.dump(movie))
+        #return jsonify(movies=movie_schema.dump(movie))
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -61,4 +61,4 @@ class MovieList(Resource):
     def get(self):
         movies = Movie.query.all()
 
-        return jsonify(movie=movies_schema.dump(movies))
+        #return jsonify(movie=movies_schema.dump(movies))

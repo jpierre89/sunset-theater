@@ -23,11 +23,12 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    password = db.Column(db.String(128))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    reservations = db.relationship('Reservation', backref=db.backref('user', lazy=True))
 
     def __str__(self):
         return self.email
@@ -39,14 +40,14 @@ class User(db.Model, UserMixin):
         return cls.query.filter_by(email=username).first()
 
 
-db.create_all()
+# db.create_all()
 
 
 # flask marshmallow serializer
-class UserSchema(ModelSchema):
-    class Meta:
-        model = User
+#class UserSchema(ModelSchema):
+#    class Meta:
+#        model = User
 
 
-users_schema = UserSchema(many=True)
-user_schema = UserSchema()
+#users_schema = UserSchema(many=True)
+#user_schema = UserSchema()

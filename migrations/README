@@ -1,1 +1,3 @@
 Generic single-database configuration.
+
+Set render_as_batch in run_migations_online() in env.py for SQLlite support for table altering.

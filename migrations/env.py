@@ -22,17 +22,16 @@ logger = logging.getLogger('alembic.env')
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from flask import current_app
-
 config.set_main_option(
     'sqlalchemy.url', current_app.config.get(
         'SQLALCHEMY_DATABASE_URI').replace('%', '%%'))
 target_metadata = current_app.extensions['migrate'].db.metadata
 
-
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -48,8 +47,7 @@ def run_migrations_offline():
     """
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
-        url=url, target_metadata=target_metadata, literal_binds=True,
-        render_as_batch=True,  # *ADDED*
+        url=url, target_metadata=target_metadata, literal_binds=True
     )
 
     with context.begin_transaction():
@@ -84,7 +82,8 @@ def run_migrations_online():
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            render_as_batch=True,  # For SQLite: allows table alter (not needed for add)
+            # Added render_as_batch for SQLlite support for table alter
+            render_as_batch=config.get_main_option('sqlalchemy.url').startswith('sqlite:///'),
             process_revision_directives=process_revision_directives,
             **current_app.extensions['migrate'].configure_args
         )

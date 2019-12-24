@@ -36,10 +36,8 @@ $ flask run
    
 Navigate to URL in a browser
 
-#### Database Migration
-- Changes schema while maintaining data in database
-- Note: SQLite doesn's support alter table, thus render_as_batch=True for migration env
-https://alembic.sqlalchemy.org/en/latest/batch.html#batch-mode-with-autogenerate
+#### Migration
+* Changes schema while maintaining data in database
 1. Generate migration script
 2. run script to upgrade database
 
@@ -48,7 +46,13 @@ $ flask db migrate -m 'commit message'
 $ flask db upgrade
 ```
 
-#### Common Issues
+#### Flask Shell
+* Use in venv to get python session with auto project imports
+```
+$ flask shell
+```
+
+#### Flask Error Solutions
 * OSERROR: Address already in use
     * e.g. forgot to quit server
     * Solution: find pid and quit
@@ -57,3 +61,13 @@ $ flask db upgrade
 $ ps -fA | grep python
 $ kill -9 <pid>
 ```
+
+#### Migration Error Solutions
+* note: SQLite doesn's support alter table, thus set render_as_batch
+    * https://github.com/miguelgrinberg/Flask-Migrate/issues/61
+* "target Database is not up to date"
+    * https://stackoverflow.com/questions/17768940/target-database-is-not-up-to-date
+```
+$ flask db stamp head
+```
+
