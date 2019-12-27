@@ -1,2 +1,3 @@
 from .admin import *
-from .views import *
+from .models import *
+from .routes import *

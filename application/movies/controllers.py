@@ -17,6 +17,7 @@ class OneMovie(Resource):
         if not movie:
             return abort(404, 'Movie with id: {} does not exist in database.'.format(self.args['movie_id']))
 
+        return jsonify(movie.title)
         #return jsonify(movies=movie_schema.dump(movie))
 
     def post(self):
@@ -60,5 +61,4 @@ class MovieList(Resource):
     @jwt_required
     def get(self):
         movies = Movie.query.all()
-
         #return jsonify(movie=movies_schema.dump(movies))

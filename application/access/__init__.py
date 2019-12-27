@@ -8,3 +8,4 @@ app.register_blueprint(access_bp)
 
 from .models import *
 from .routes import *
+from .controllers import *
