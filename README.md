@@ -1,7 +1,6 @@
 ## Theater API
 
->RESTful API for access to Theater Database returning JSON objects consumed by client browser.
->Also has admin login/access views
+>RESTful API for Sunset Theater
 
 #### Resources
 * Flask RESTful Workshop
@@ -36,7 +35,7 @@ $ flask run
    
 Navigate to URL in a browser
 
-#### Migration
+#### Migration - Removed
 * Changes schema while maintaining data in database
 1. Generate migration script
 2. run script to upgrade database
@@ -46,7 +45,7 @@ $ flask db migrate -m 'commit message'
 $ flask db upgrade
 ```
 
-#### Flask Shell
+#### Flask Shell - Removed
 * Use in venv to get python session with auto project imports
 ```
 $ flask shell
@@ -70,4 +69,3 @@ $ kill -9 <pid>
 ```
 $ flask db stamp head
 ```
-

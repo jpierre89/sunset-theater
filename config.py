@@ -1,12 +1,15 @@
 import os
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 # stores configuration variables
 class Config(object):
+    DEBUG = False
+
     # Create Database and SQL Alchemy settings
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'api.db')
+                              'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_ECHO = True
     # signals app every time change is about to be made to database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
