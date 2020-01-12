@@ -1,15 +1,15 @@
-from flask import jsonify
+from flask import jsonify, abort
 from flask_jwt_extended import jwt_required
-from flask_restful import Resource, reqparse, abort
+from flask_restful import Resource, reqparse
 
 from app import db
 from app.models.movie import Movie
 from app.models.actor import Actor
-from app.controllers import movie_schema
+from app.controllers import movie_schema, auth_required
 
 
 class MovieRoute(Resource):
-    @jwt_required
+    @auth_required
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('movie_id', type=int, required=True)
@@ -22,7 +22,7 @@ class MovieRoute(Resource):
         # return jsonify(movie.title)
         return jsonify(movie_schema.dump(movie))
 
-    @jwt_required
+    @auth_required
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('title', type=str, required=True),

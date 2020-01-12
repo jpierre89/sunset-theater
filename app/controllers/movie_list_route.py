@@ -1,13 +1,13 @@
-from flask import jsonify
+from flask import jsonify, abort
 from flask_jwt_extended import jwt_required
-from flask_restful import Resource, abort
+from flask_restful import Resource
 
 from app.models.movie import Movie
-from app.controllers import movie_schema
+from app.controllers import movie_schema, auth_required
 
 
 class MovieListRoute(Resource):
-    @jwt_required
+    @auth_required
     def get(self):
         """returns a list of all movies"""
 

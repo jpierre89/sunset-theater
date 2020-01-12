@@ -1,10 +1,12 @@
-from flask import render_template
+from functools import wraps
+
+from flask import render_template, abort
 from flask import Flask
 from flask_cors import CORS
 from flask_marshmallow import Marshmallow
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, verify_jwt_in_request
 from flask_migrate import Migrate
 
 from config import Config
@@ -18,6 +20,8 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 jwt = JWTManager(app)
 migrate = Migrate(app, db)
+
+
 
 # database models
 from app.models.auditorium import Auditorium

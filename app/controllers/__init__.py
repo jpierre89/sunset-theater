@@ -1,4 +1,9 @@
-from app import ma
+from functools import wraps
+
+from flask_jwt_extended import verify_jwt_in_request
+
+from app import ma, app
+from flask import abort
 from marshmallow import fields
 from marshmallow_sqlalchemy.fields import Nested
 
@@ -12,6 +17,23 @@ from app.models.auditorium import Auditorium
 from app.models.reservation import Reservation
 from app.models.seat import Seat
 from app.models.role import Role
+
+
+def auth_required(func):
+    """decorator - require valid/non-expired access token"""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+
+        try:
+            verify_jwt_in_request()  # throws error if token expired or not valid
+        except:
+            app.logger.error('jwt token auth failed: invalid or expired')
+            abort(401)
+
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
 class RoleSchema(ma.ModelSchema):

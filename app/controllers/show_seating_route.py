@@ -1,15 +1,15 @@
-from flask import jsonify
+from flask import jsonify, abort
 from flask_jwt_extended import jwt_required
-from flask_restful import Resource, reqparse, abort
+from flask_restful import Resource, reqparse
 from app.models.show import Show
 from app.models.auditorium import Auditorium
-from app.controllers import seating_schema
+from app.controllers import seating_schema, auth_required
 
 
 class ShowSeatingRoute(Resource):
     """returns a sorted list of all seats in a auditorium given an auditorium's id"""
 
-    @jwt_required
+    @auth_required
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('show_id', type=int, required=True)

@@ -1,12 +1,12 @@
-from flask import jsonify
-from flask_jwt_extended import jwt_required
-from flask_restful import Resource, reqparse, abort
+from flask import jsonify, abort
+from flask_jwt_extended import jwt_required  # replaced by custom auth_required
+from flask_restful import Resource, reqparse
 from app.models.show import Show
-from app.controllers import shows_movie_nested_schema
+from app.controllers import shows_movie_nested_schema, auth_required
 
 
 class ShowsOnDateRoute(Resource):
-    @jwt_required
+    @auth_required
     def get(self):
         """returns a list of shows given a date"""
 
@@ -17,6 +17,6 @@ class ShowsOnDateRoute(Resource):
 
         shows = Show.query.filter(Show.date == date_arg).all()
         if not shows:
-            return abort(404, 'No movies scheduled for {}.'.format(date_arg))
+            return abort(404, 'No shows on date')
 
         return jsonify(shows_movie_nested_schema.dump(shows, many=True))

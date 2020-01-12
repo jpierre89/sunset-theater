@@ -95,7 +95,7 @@ def security_context_processor():
 
 
 # admin views
-secure = False  # use to switch between secure view and unsecure view if developing
+secure = True  # use to switch between secure view and unsecure view if developing
 
 if secure:
     admin.add_views(

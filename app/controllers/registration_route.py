@@ -1,6 +1,6 @@
 import datetime
-from flask import jsonify
-from flask_restful import Resource, reqparse, abort
+from flask import jsonify, abort
+from flask_restful import Resource, reqparse
 from app import db
 from app.models.user import User
 

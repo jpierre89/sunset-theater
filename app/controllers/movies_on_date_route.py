@@ -1,13 +1,13 @@
-from flask import jsonify
+from flask import jsonify, abort
 from flask_jwt_extended import jwt_required
-from flask_restful import Resource, reqparse, abort
+from flask_restful import Resource, reqparse
 
 from app.models.show import Show
-from app.controllers import movies_on_date_schema
+from app.controllers import movies_on_date_schema, auth_required
 
 
 class MoviesOnDateRoute(Resource):
-    @jwt_required
+    @auth_required
     def get(self):
         """returns movies given a date"""
 
@@ -24,6 +24,6 @@ class MoviesOnDateRoute(Resource):
                 movies.append(show.movie)
 
         if not movies:
-            return abort(404, 'No movies scheduled for {}.'.format(date_arg))
+            return abort(404, 'No movies on date')
 
         return jsonify(movies_on_date_schema.dump(movies, many=True))

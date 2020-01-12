@@ -1,11 +1,13 @@
-from flask import jsonify
+from flask import jsonify, abort
 from flask_jwt_extended import jwt_required
-from flask_restful import Resource, reqparse, abort
+from flask_restful import Resource, reqparse
+
+from app.controllers import auth_required
 from app.models.movie import Movie
 
 
 class DatesRoute(Resource):
-    @jwt_required
+    @auth_required
     def get(self):
         """returns dates a movie is playing given a movie's id"""
 

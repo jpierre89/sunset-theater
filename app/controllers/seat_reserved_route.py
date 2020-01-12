@@ -1,12 +1,14 @@
 from flask import jsonify
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
+
+from app.controllers import auth_required
 from app.models.reservation import Reservation
 
 
 class SeatReservedRoute(Resource):
     """returns true if a seat is reserved for a show; else false"""
-    @jwt_required
+    @auth_required
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('show_id', type=int, required=True)
