@@ -1,10 +1,9 @@
 from flask import jsonify, abort
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import get_jwt_identity
 from flask_restful import Resource, reqparse
 
 from app import db
 from app.models.reservation import Reservation
-from app.models.user import User
 from app.models.show import Show
 from app.models.seat import Seat
 from app.controllers import reservation_detail_schema, auth_required
@@ -17,7 +16,7 @@ class ReservationRoute(Resource):
 
         user_id = get_jwt_identity()
 
-        reservations = Reservation.query.filter(User.id == user_id).all()
+        reservations = Reservation.query.filter(Reservation.user_id == user_id).all()
         return jsonify(reservation_detail_schema.dump(reservations, many=True))
 
     @auth_required

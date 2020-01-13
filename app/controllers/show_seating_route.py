@@ -1,5 +1,4 @@
 from flask import jsonify, abort
-from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
 from app.models.show import Show
 from app.models.auditorium import Auditorium

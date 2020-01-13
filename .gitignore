@@ -20,5 +20,5 @@ venv
 app.db
 
 # ignore frontend distribution
-app/static/dist
-app/templates/index.html
+# app/static/dist
+# app/templates/index.html

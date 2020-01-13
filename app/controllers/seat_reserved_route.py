@@ -1,5 +1,4 @@
 from flask import jsonify
-from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
 
 from app.controllers import auth_required
