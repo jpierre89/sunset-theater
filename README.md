@@ -2,9 +2,13 @@
 
 >RESTful API for Sunset Theater
 
-#### Resources
-* Flask RESTful Workshop
-* The Flask Mega Tutorial
+#### Update frontend distribution
+* Angular CLI on frontend directory:
+```
+$ ng build --prod
+```
+* copy /dist/<project name>/index.html to templates folder
+* copy dist/<project name>/* to static folder 
 
 #### Tools
 * Python3

@@ -1,0 +1,57 @@
+<html>
+<head>
+    <style>
+        .list {
+            font-size: 1.5em;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+        }
+    </style>
+</head>
+    <body>
+        <div>
+            <h1>Theater API</h1>
+            <a href="{{ url_for('admin.index') }}">Admin Entrance</a>
+            <h3>Route Information</h3>
+            <ul style="font-size: 1.5em">
+                <li class="list">/access</li>
+                <ul><li>[POST] params: username, password</li></ul>
+
+                <li class="list">/date</li>
+                <ul><li>[GET] params: movie_id</li></ul>
+
+                <li class="list">/movie</li>
+                <ul>
+                    <li>[GET] params: movie_id</li>
+                    <li>[POST]</li>
+                </ul>
+
+                <li class="list">/movies/all</li>
+                <ul><li>[GET]</li></ul>
+
+                <li class="list">/movies/date</li>
+                <ul><li>[GET] params: date</li></ul>
+
+                <li class="list">/shows/date</li>
+                <ul><li>[GET] params: date</li></ul>
+
+                <li class="list">/show/seating</li>
+                <ul><li>[GET] params: show_id</li></ul>
+
+                <li class="list">/reservations</li>
+                <ul>
+                    <li>[GET]</li>
+                    <li>[POST] params: show_id, seat_id</li>
+                    <li>[DELETE] params: reservation_id</li>
+                </ul>
+
+                <li class="list">/seat/reserved</li>
+                <ul><li>[GET] params: show_id, seat_id</li></ul>
+
+                <li class="list">/registration</li>
+                <ul><li>[POST] params: first_name, last_name, email, password</li></ul>
+
+            </ul>
+        </div>
+    </body>
+</html>

@@ -18,3 +18,7 @@ venv
 
 # ignore database
 app.db
+
+# ignore frontend distribution
+app/static/dist
+app/templates/index.html
