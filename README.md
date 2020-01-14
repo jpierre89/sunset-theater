@@ -2,6 +2,8 @@
 
 >RESTful API for Sunset Theater
 
+Note: If no user with admin role, start secure = false to create user with superuser role in /admin url.
+
 #### Update frontend distribution
 * Angular CLI on frontend directory:
 ```
