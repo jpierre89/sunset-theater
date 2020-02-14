@@ -22,7 +22,7 @@ before_script:
   - pip3 install -r requirements.txt
   - pip3 list
   - ls -la
-  - chmod +x main.py
+  - chmod +x app.py
 
 test:
   script:
