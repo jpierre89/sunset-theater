@@ -111,3 +111,6 @@ Note:
 - Initially, cache will fail because it does not yet exist. Also, Your test must succeed in order for packages to be cached by gitlab. You will see that iw uploads the cach.zip with dependencies when your push succeeds.
 
 11)	Add a comment somewhere, add/commit/push and notice again look at the pipeline. Notice how the dependencies are already satisfied, and the pipeline is much faster.
+
+12) In Gitlab repo, go to Settings -> General -> merge requests, and notice the box 'pipelines must succeeed'. 
+    A Maintainer should check this box for every repo in our group, so if the pipeline fails, the push will not be successful, and the pusher will need to fix all failed tests.
