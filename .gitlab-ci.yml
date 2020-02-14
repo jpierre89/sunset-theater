@@ -22,11 +22,7 @@ before_script:
   - pip3 install -r requirements.txt
   - pip3 list
   - ls -la
-  - mkdir ../instance
-  - ls -la ..
-  - chmod +x prepopulate.py
   - chmod +x main.py
-  - python3 ./prepopulate.py
 
 test:
   script:
