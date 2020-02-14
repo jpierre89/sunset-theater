@@ -11,10 +11,8 @@ from flask_migrate import Migrate
 
 from config import Config
 
-#  , static_url_path='/app'
 app = Flask(__name__)
 CORS(app)
-
 app.config.from_object(Config)
 api = Api(app)
 db = SQLAlchemy(app)
@@ -63,25 +61,8 @@ api.add_resource(ReservationRoute, '/reservations')
 api.add_resource(SeatReservedRoute, '/seat/reserved')
 api.add_resource(RegistrationRoute, '/registration')
 
-
-#@app.route('/<path:path>', methods=['GET'])
-#def static_proxy(path):
-#  return send_from_directory('./', path)
-
-
-#@app.route('/')
-#def root():
-#  return send_from_directory('./', 'index.html')
-
-
 @app.route('/')
 def index():
     return render_template('index.html')  # renders parameter in templates folder
-
-
-#@app.route('/app')
-#def home():
-#    return app.send_static_file('index.html')
-
 
 db.create_all()

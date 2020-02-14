@@ -1,45 +1,51 @@
-## Theater API
+# Theater API
 
 >RESTful API for Sunset Theater
 
-Note: If no user with admin role, start secure = false to create user with superuser role in /admin url.
+## First time setup for liux
+__0. Install python3 and pip3__
 
-#### Update frontend distribution
-* Angular CLI on frontend directory:
+__1. Clone Repo__ <br>
+$ git clone https://git.txstate.edu/jfp35/Theater_API
+
+__2. Create virtual environment from project root directory__ <br>
+$ python3 -m venv env
+
+__3. Activate virtual environment from project root directory__ <br>
+$ source env/bin/activate
+
+__4. Install dependencies__ <br>
+$ pip3 install -r requirements.txt
+
+__5. Run__ <br>
+$ flask run
+
+__6. Navigate to http://127.0.0.1:5000 in browser__ 
+
+## Flask Error Solutions
+* OSERROR: Address already in use
+    * e.g. forgot to quit server
+    * Solution: find pid and quit
+
+```
+$ ps -fA | grep python
+$ kill -9 <pid>
+```
+
+## updating frontend distribution
+* Build frontend distribution in angular project:
 ```
 $ ng build --prod
 ```
-* copy /dist/<project name>/index.html to templates folder
-* copy dist/<project name>/* to static folder 
-
-#### Tools
-* Python3
-* Flask RESTful
-* Virtual Environment
-* Ubuntu Linux
-* PyCharm
-
-#### Dependencies 
-1. Create virtual environment in project root
-2. Activate virtual environment
-3. Install dependencies
-
+* Insert front end distribution files into this project
+    * copy /dist/<project name>/index.html to templates folder
+    * copy dist/<project name>/* to static folder 
+    
+#### Flask Shell - Removed
+* Use in venv to get python session with auto project imports
 ```
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ pip3 install -r requirements.txt 
+$ flask shell
 ```
-
-#### Run
-Ensure virtual environment is activated
-Note: FLASK_APP environment variable is set by .flaskenv
-
-```
-$ export FLASK_APP=main.py
-$ flask run
-```
-   
-Navigate to URL in a browser
 
 #### Migration - Removed
 * Changes schema while maintaining data in database
@@ -49,22 +55,6 @@ Navigate to URL in a browser
 ```
 $ flask db migrate -m 'commit message'
 $ flask db upgrade
-```
-
-#### Flask Shell - Removed
-* Use in venv to get python session with auto project imports
-```
-$ flask shell
-```
-
-#### Flask Error Solutions
-* OSERROR: Address already in use
-    * e.g. forgot to quit server
-    * Solution: find pid and quit
-
-```
-$ ps -fA | grep python
-$ kill -9 <pid>
 ```
 
 #### Migration Error Solutions
