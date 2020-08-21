@@ -1,5 +1,5 @@
+import os
 from functools import wraps
-
 from flask import render_template, abort, send_from_directory
 from flask import Flask
 from flask_cors import CORS
@@ -9,11 +9,28 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager, verify_jwt_in_request
 from flask_migrate import Migrate
 
-from config import Config
 
 app = Flask(__name__)
+
+app.config.production = False
+app.config.development = False
+
+# Config
+environment = os.getenv("ENVIRONMENT", "development")
+if environment == "development":
+    from config import DevelopmentConfig
+    app.config.from_object(DevelopmentConfig())
+    app.config.development = True
+elif environment == "production":
+    from config import ProductionConfig
+    app.config.from_object(ProductionConfig())
+    app.config.production = True
+else:
+    raise ValueError(f'"{environment}" not valid environment.')
+
+
+# Extensions
 CORS(app)
-app.config.from_object(Config)
 api = Api(app)
 db = SQLAlchemy(app)
 ma = Marshmallow(app)

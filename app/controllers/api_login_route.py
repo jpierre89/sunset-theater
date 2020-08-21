@@ -22,7 +22,7 @@ class ApiLoginRoute(Resource):
         data = self.parser.parse_args()
         # read from database to find the user and then check the password
         user = User.find_by_username(data['username'])
-        if user and verify_password(data['password'], user.password):
+        if user and user.password == data['password']:
             # when authenticated, return a fresh access token and a refresh token
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)

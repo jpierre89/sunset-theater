@@ -67,7 +67,10 @@ class ReservationRoute(Resource):
         user_id = get_jwt_identity()
 
         #  filter both conditions to check if user is the one making the request
-        Reservation.query.filter(Reservation.user_id == user_id, Reservation.id == res_id).delete()
+        Reservation.query.filter(
+            Reservation.user_id == user_id,
+            Reservation.id == res_id
+        ).delete()
 
         try:
             db.session.commit()
@@ -77,9 +80,17 @@ class ReservationRoute(Resource):
         return jsonify(message='reservation successfully removed.')
 
     @classmethod
-    def verifySeatAvailability(self, seat_ids, show_id):
+    def verifySeatAvailability(cls, seat_ids, show_id):
+        """Return first seat_id that is not available, else None"""
+
+        user_id = get_jwt_identity()
+
         for seat_id in seat_ids:
-            reservation = Reservation.query.filter(Reservation.seat_id == seat_id, Reservation.show_id == show_id).first()
+            reservation = Reservation.query.filter(
+                Reservation.seat_id == seat_id,
+                Reservation.show_id == show_id,
+                Reservation.user_id == user_id
+            ).first()
 
             if reservation is not None:
                 return seat_id

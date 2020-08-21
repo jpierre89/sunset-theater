@@ -6,7 +6,7 @@ from app.controllers import seating_schema, auth_required
 
 
 class ShowSeatingRoute(Resource):
-    """returns a sorted list of all seats in a auditorium given an auditorium's id"""
+    """returns a sorted list of all seats for a show given a show id"""
 
     @auth_required
     def get(self):

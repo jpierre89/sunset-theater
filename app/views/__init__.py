@@ -76,7 +76,11 @@ class UnsecureMovieView(UnsecureModelView):
 
 
 # Flask Admin
-admin = Admin(app, name='Sunset Theater', base_template='my_master.html', template_mode='bootstrap3')
+admin = Admin(
+    app, name='Sunset Theater',
+    base_template='my_master.html',
+    template_mode='bootstrap3'
+)
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
@@ -93,9 +97,12 @@ def security_context_processor():
         get_url=url_for
     )
 
-
 # admin views
-secure = False  # use to switch between secure view and unsecure view if developing
+if app.config.production:
+    # use to switch between secure view and unsecure view if developing
+    secure = True 
+else:
+    secure = False
 
 if secure:
     admin.add_views(

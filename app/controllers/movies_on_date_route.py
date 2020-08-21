@@ -1,5 +1,6 @@
 from flask import jsonify, abort
 from flask_restful import Resource, reqparse
+from flask import session  #TODO
 
 from app.models.show import Show
 from app.controllers import movies_on_date_schema, auth_required

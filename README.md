@@ -1,23 +1,10 @@
 # Theater API
 
->RESTful API for Sunset Theater
+>API for Sunset Theater
 
 ## First time setup for linux
-<pre>
-1. Clone this remote repository
-2. Change to cloned project directory
-3. Create virtual environment from project root directory
-4. Activate virtual environment from project root directory
-5. Install all dependencies listed in requirements.txt file
-6. Run
-7. Navigate to http://127.0.0.1:5000 in browser
-</pre>
 
-* Note: python3 and pip3 are required for this setup
-
-```
-$ git clone <repository url>
-$ cd <project name>
+```sh
 $ python3 -m venv env
 $ source env/bin/activate
 $ pip3 install -r requirements.txt
