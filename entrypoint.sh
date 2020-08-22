@@ -9,18 +9,14 @@ done
 echo "theater database started ..."
 
 
-else if [ "$ENVIRONMENT" == "production" ]
+if [ "$ENVIRONMENT" == "production" ]
 then
-  echo "launching production server"
-  gunicorn theater_api.wsgi:app\
-           --bind 0.0.0.0:443
-
-else if [ "$ENVIRONMENT" == "development" ]
+  echo "launching PRODUCTION server"
+  gunicorn app:app --bind 0.0.0.0:443
+elif [ "$ENVIRONMENT" == "development" ]
 then
-  echo "launching development server"
-  gunicorn theater_api.wsgi:app\
-           --bind 0.0.0.0:443\
-           --reload
+  echo "launching DEVELOPMENT server"
+  gunicorn app:app --bind 0.0.0.0:443 --reload
 else
   echo "(entrypoint.sh) ENVIRONMENT has value: $ENVIRONMENT
 This environment is not implemented."

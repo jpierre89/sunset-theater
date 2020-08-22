@@ -12,10 +12,9 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
+# Config
 app.config.production = False
 app.config.development = False
-
-# Config
 environment = os.getenv("ENVIRONMENT", "development")
 if environment == "development":
     from config import DevelopmentConfig
@@ -27,7 +26,6 @@ elif environment == "production":
     app.config.production = True
 else:
     raise ValueError(f'"{environment}" not valid environment.')
-
 
 # Extensions
 CORS(app)
