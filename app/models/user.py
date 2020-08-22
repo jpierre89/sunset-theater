@@ -7,10 +7,9 @@ class User(db.Model, UserMixin):
     """a user of this api"""
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(255), nullable=True)
-    last_name = db.Column(db.String(255), nullable=True)
-    email = db.Column(db.String(255), index=True, unique=True, nullable=False)
+    username = db.Column(db.String(255), index=True, unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
+    first_name = db.Column(db.String(255), nullable=True)
     active = db.Column(db.Boolean(), nullable=False)
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
@@ -22,6 +21,4 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def find_by_username(cls, username):
-        """username is email"""
-
-        return cls.query.filter_by(email=username).first()
+        return cls.query.filter_by(username=username).first()

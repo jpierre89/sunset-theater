@@ -3,6 +3,8 @@ from flask_restful import Resource, reqparse
 from app.models.show import Show
 from app.models.auditorium import Auditorium
 from app.controllers import seating_schema, auth_required
+from app.controllers.reservation_route import ReservationRoute
+from flask_jwt_extended import get_jwt_identity
 
 
 class ShowSeatingRoute(Resource):
@@ -25,4 +27,14 @@ class ShowSeatingRoute(Resource):
             return abort(404, 'Auditorium Error.')
 
         auditorium_seats = sorted(auditorium_seats, key=lambda x: x.number, reverse=False)
-        return jsonify(seating_schema.dump(auditorium_seats, many=True))
+        
+        seats = seating_schema.dump(auditorium_seats, many=True)
+        
+        for seat in seats:
+            reserved_id = ReservationRoute.verifySeatAvailability([seat["id"],], show_id)
+            if reserved_id:
+                seat["is_reserved"] = True
+            else:
+                seat["is_reserved"] = False
+
+        return jsonify(seats)
