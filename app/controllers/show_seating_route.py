@@ -26,7 +26,10 @@ class ShowSeatingRoute(Resource):
         if not auditorium_seats:
             return abort(404, 'Auditorium Error.')
 
-        auditorium_seats = sorted(auditorium_seats, key=lambda x: x.number, reverse=False)
+        auditorium_seats = sorted(
+            # x.number.length is < 3
+            auditorium_seats, key=lambda x: (x.number[0], int(x.number[1:])), reverse=False
+        )
         
         seats = seating_schema.dump(auditorium_seats, many=True)
         

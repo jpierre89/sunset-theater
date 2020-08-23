@@ -10,6 +10,7 @@ class BaseConfig():
     # Flask Security non-private settings
     SECURITY_URL_PREFIX = '/admin'
     SECURITY_PASSWORD_HASH = 'pbkdf2_sha512'
+    SECURITY_PASSWORD_SALT = 'IIUHF0asdfkl98VHGlasdkl'
     SECURITY_LOGIN_URL = '/login/'
     SECURITY_LOGOUT_URL = '/logout/'
     SECURITY_REGISTER_URL = '/register/'
@@ -18,6 +19,7 @@ class BaseConfig():
     SECURITY_POST_REGISTER_VIEW = '/admin/'
     SECURITY_REGISTERABLE = True
     SECURITY_SEND_REGISTER_EMAIL = False
+    SECURITY_USER_IDENTITY_ATTRIBUTES = ('username','email')
 
 
 class DevelopmentConfig(BaseConfig):
@@ -33,6 +35,11 @@ class DevelopmentConfig(BaseConfig):
     # JWT settings
     JWT_SECRET_KEY = 'SECRET'
 
+    # Admin login
+    ADMIN_USERNAME = "admin"
+    ADMIN_EMAIL = "admin"
+    ADMIN_PASSWORD = "admin"
+
 
 class ProductionConfig(BaseConfig):
     FLASK_ADMIN_SWATCH = 'cerulean'
@@ -43,7 +50,11 @@ class ProductionConfig(BaseConfig):
     def __init__(self):
         self.SECRET_KEY = os.environ.get('SECRET_KEY')
         self.JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
-        #db
+        # Admin login
+        self.ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+        self.ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL")
+        self.ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+        # db
         self.DB_TYPE = os.getenv("DB_TYPE")
         self.DB_USER = os.getenv('DB_USER')
         self.DB_PASSWORD = os.getenv('DB_PASSWORD')

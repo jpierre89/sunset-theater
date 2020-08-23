@@ -8,7 +8,8 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), index=True, unique=True, nullable=False)
-    password = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=True)  # optional - for Flask admin
+    password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(255), nullable=True)
     active = db.Column(db.Boolean(), nullable=False)
     confirmed_at = db.Column(db.DateTime())

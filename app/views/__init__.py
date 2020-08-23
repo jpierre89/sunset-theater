@@ -1,7 +1,8 @@
 from flask import redirect, url_for, request, abort
 from flask_security import current_user, SQLAlchemyUserDatastore, Security
 from flask_admin.contrib.sqla import ModelView
-from flask_admin import helpers as admin_helpers, Admin
+from flask_admin import helpers as admin_helpers, Admin, AdminIndexView
+
 
 from app import db, app
 
@@ -79,15 +80,16 @@ class UnsecureMovieView(UnsecureModelView):
 admin = Admin(
     app, name='Sunset Theater',
     base_template='my_master.html',
-    template_mode='bootstrap3'
+    template_mode='bootstrap3',
+    index_view=AdminIndexView(
+        url='/admin'
+    )
 )
 
+# flask-security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-
-
-# define a context processor for merging flask-admin's template context into the
-# flask-security views.
+# context processor for merging flask-admin's template context to flask-security
 @security.context_processor
 def security_context_processor():
     return dict(
@@ -100,9 +102,11 @@ def security_context_processor():
 # admin views
 if app.config.production:
     # use to switch between secure view and unsecure view if developing
-    secure = True 
+    secure = True
+    print("Admin Secure") 
 else:
     secure = False
+    print("Admin not secure") 
 
 if secure:
     admin.add_views(
